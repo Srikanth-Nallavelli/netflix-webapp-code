@@ -56,7 +56,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version> <!-- Stable version compatible with Java 11 -->
+                <version>3.10.0</version> <!-- Updated version -->
                 <configuration>
                     <source>11</source>
                     <target>11</target>
