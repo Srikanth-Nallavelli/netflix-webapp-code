@@ -52,22 +52,11 @@
     
     <build>
         <plugins>
-            <!-- Maven Compiler Plugin with Java 11 support -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version> <!-- A version that supports Java 11 -->
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                </configuration>
-            </plugin>
-
             <!-- SonarQube Maven Plugin with a compatible version -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.9.0.2155</version> <!-- Adjust if needed -->
+                <version>3.9.0.2155</version> <!-- Adjust to a compatible version -->
             </plugin>
         </plugins>
     </build>
