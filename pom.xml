@@ -10,10 +10,8 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <!-- Define Java version -->
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <docker.image.prefix>kammana</docker.image.prefix>
     </properties>
 
     <dependencies>
@@ -56,7 +54,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version> <!-- Compatible version with Maven -->
+                <version>3.8.1</version> <!-- Adjust if necessary -->
                 <configuration>
                     <source>11</source>
                     <target>11</target>
