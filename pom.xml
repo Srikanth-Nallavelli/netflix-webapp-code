@@ -3,6 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>in.RAHAM</groupId>
     <artifactId>NETFLIX</artifactId>
     <packaging>war</packaging>
@@ -11,8 +12,8 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source> <!-- Set Java version to 17 -->
+        <maven.compiler.target>17</maven.compiler.target> <!-- Set Java version to 17 -->
         <docker.image.prefix>kammana</docker.image.prefix>
     </properties>
 
@@ -56,7 +57,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <version>3.8.1</version> <!-- Compatible with newer Maven versions -->
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
@@ -67,7 +68,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>3.3.0</version> <!-- Updated version for compatibility -->
             </plugin>
         </plugins>
     </build>
