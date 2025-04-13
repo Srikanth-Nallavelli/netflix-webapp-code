@@ -10,8 +10,10 @@
     <url>http://maven.apache.org</url>
 
     <properties>
+        <!-- Use Java 8 for compatibility with Maven 3.0.5 -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <docker.image.prefix>kammana</docker.image.prefix>
     </properties>
 
     <dependencies>
@@ -41,23 +43,24 @@
         </repository>
     </distributionManagement>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <build>
         <plugins>
+            <!-- Maven Compiler Plugin to compile Java 8 code -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <version>3.6.1</version> <!-- Compatible with Maven 3.0.5 -->
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
                 </configuration>
-            </plugin>
-
-            <!-- SonarQube Maven Plugin compatible with Maven 3.0.5 and Java 8 -->
-            <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.9.0.2155</version> <!-- Compatible with Java 8 -->
             </plugin>
         </plugins>
     </build>
