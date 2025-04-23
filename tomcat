@@ -1,0 +1,32 @@
+TOMCAT SETUP:
+1. wget http://dlcdn.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz
+wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.81/bin/apache-tomcat-9.0.81.tar.gz
+
+
+2. tar -zxvf apache-tomcat-9.0.80.tar.gz
+tar -zxvf apache-tomcat-9.0.81.tar.gz
+
+3. 	
+
+  <role rolename="manager-gui"/>
+<role rolename="admin-gui"/>
+<user username="admin" password="admin" roles="manager-gui,admin-gui"/>
+
+
+4. vim apache-tomcat-9.0.81/webapps/manager/META-INF/context.xml (delete 21,22)
+5. sh apache-tomcat-9.0.81/bin/startup.sh
+
+public-ip slave:8080
+manager app -- > usrername and passowd
+
+Download pluguin -- > Deploy to container : this is to deploy on tomcat
+
+
+Dashboard
+Manage Jenkins
+Credentials
+System
+Global credentials (unrestricted)
+add credentials -- > username and password -- > save
+
+http://13.39.49.204:8080/netflix/
