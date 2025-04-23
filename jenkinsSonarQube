@@ -1,0 +1,58 @@
+# Update system packages
+yum update -y
+
+# Install required packages
+yum install git maven java-11-openjdk java-11-openjdk-devel -y
+
+# Add Jenkins repo and import key
+wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+
+# Install Jenkins
+yum install jenkins -y
+
+# Set Java 11 as default
+alternatives --config java
+
+# Ensure correct permissions for Jenkins
+chown -R jenkins:jenkins /var/lib/jenkins
+chown -R jenkins:jenkins /var/log/jenkins
+chown -R jenkins:jenkins /var/cache/jenkins
+
+# Reload and start Jenkins
+systemctl daemon-reload
+systemctl enable jenkins
+systemctl start jenkins
+systemctl status jenkins
+
+# Verify tools
+git --version
+mvn --version
+java -version
+----------------------------------------------------------------------------------
+#!/bin/bash
+# Run as root or with sudo
+
+# 1. Download and extract SonarQube
+cd /opt/
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.6.50800.zip
+unzip sonarqube-8.9.6.50800.zip
+
+# 2. Install Java 11
+amazon-linux-extras enable corretto11
+yum clean metadata
+yum install java-11-amazon-corretto -y
+
+# 3. Create sonar user
+useradd sonar
+
+# 4. Set permissions
+chown -R sonar:sonar /opt/sonarqube-8.9.6.50800
+
+# 5. Switch to sonar user and start SonarQube
+sudo -u sonar bash -c '
+cd /opt/sonarqube-8.9.6.50800/bin/linux-x86-64
+./sonar.sh start
+./sonar.sh status
+'
+
