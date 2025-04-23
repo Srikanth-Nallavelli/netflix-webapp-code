@@ -1,0 +1,69 @@
+pipeline {
+    agent {
+        label 'slave1'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking out the code from Git repository...'
+                git 'https://github.com/PavanKumarNalla/netflix-webapp-code.git'
+            }
+        }
+
+        stage('Compile') {
+            steps {
+                echo 'Compiling the project...'
+                sh 'mvn compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running unit tests...'
+                sh 'mvn test'
+            }
+        }
+
+        stage('Code Quality') {
+            steps {
+                echo 'Running SonarQube analysis...'
+                sh '''
+                   mvn sonar:sonar \
+                            -Dsonar.projectKey=pavan \
+                            -Dsonar.host.url=http://3.76.226.206:9000 \
+                            -Dsonar.login=91b5e04bd94d96fec1e39ec8f5d16704b6e7313c
+                '''
+            }
+        }
+          stage('Artifact') {
+             steps {
+               sh 'mvn clean install'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                     // Path to the WAR file that you want to deploy
+                    def warFile = 'target/NETFLIX-1.2.2.war'
+
+                    // Tomcat URL for deployment
+                   def tomcatUrl = 'http://18.185.132.53:8080/manager/text/deploy?path=/netflix&update=true'
+
+                    // Tomcat username and password
+                  def tomcatUser = 'admin'
+                 def tomcatPassword = 'admin'
+    
+               echo "Deploying ${warFile} to Tomcat..."
+
+                 // Use curl to upload the WAR file to Tomcat
+     sh """
+        curl -v -u ${tomcatUser}:${tomcatPassword} \\
+             --upload-file ${warFile} \\
+             "${tomcatUrl}"
+    """
+         }
+            }
+        }
+      }
+}
