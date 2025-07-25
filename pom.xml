@@ -52,6 +52,7 @@
     </pluginRepositories>
 
     <build>
+        <finalName>netflix</finalName>
         <plugins>
             <!-- Maven Compiler Plugin -->
             <plugin>
