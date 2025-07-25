@@ -71,6 +71,36 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.0</version> <!-- Updated version for compatibility -->
             </plugin>
+            <!-- Jib Plugin for Docker Image Build -->
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <from>
+                        <image>tomcat:9.0-jdk17</image>
+                    </from>
+                    <to>
+                        <image>netflix-app</image>
+                    </to>
+                    <container>
+                        <ports>
+                            <port>8080</port>
+                        </ports>
+                    </container>
+                    <extraDirectories>
+                        <paths>
+                            <path>
+                                <from>${project.build.directory}</from>
+                                <into>/usr/local/tomcat/webapps</into>
+                                <includes>
+                                    <include>netflix.war</include>
+                                </includes>
+                            </path>
+                        </paths>
+                    </extraDirectories>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
